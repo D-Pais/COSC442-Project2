@@ -1,6 +1,6 @@
 | **Failure Observed** | **Exposing Test** | **Fault At Cause** | **How Diagnosed** | **Correction** |
 | -------------------- | ----------------- | ------------------ | ----------------- | -------------- |
-| IndexOutOfBoundsException thrown during initialization of VendingMachine objects. | setUp() method. | for loop initializing itemArray[] checks for "i <= NUM_SLOTS" instead of "i < NUM_SLOTS". | Compiler gave constant indexOOB errors for "index 4", during initialization, leading me to check the VendingMachine constructor and see the fault. | "i <= NUM_SLOTS" replaced with "i < NUM_SLOTS"
-|
+| IndexOutOfBoundsException thrown during initialization of VendingMachine objects. | setUp() method. | for loop initializing itemArray[] checks for "i <= NUM_SLOTS" instead of "i < NUM_SLOTS". | Compiler gave constant indexOOB errors for "index 4", during initialization, leading me to check the VendingMachine constructor and see the fault. | "i <= NUM_SLOTS" replaced with "i < NUM_SLOTS" |
+| VendingMachineException thrown by insertMoney for value of 0.00 | testInsertMoney() | insertMoney() checks for "amount < 1" instead of "amount < 0". | testInsertMoney() failed with "VendingMachineException: Invalid Amount" when attempting to execute "vendor.insertMoney(0.00)", leading me to check insertMoney() for a potential comparison operator fault. | "amount < 1" replaced with "amount < 0" |
 |
 |

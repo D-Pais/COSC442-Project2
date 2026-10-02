@@ -1,4 +1,4 @@
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
@@ -128,9 +128,11 @@ public class VendingMachineTest {
         assert(item0.getName() == name);
     }
 
-    @Test
-    void testGetPrice() {
-
+    @ParameterizedTest
+    @CsvSource({ "Cola, 2.50", "Water, 1.00", "Tea, 1.50", "Scone, 2.00", "Taffy, 0.75", "Juicebox, 1.75" })
+    void testGetPrice(String name, double price) {
+        item0 = new VendingMachineItem(name, price);
+        assertEquals(price, item0.getPrice(), 0.01);
     }
 
 }

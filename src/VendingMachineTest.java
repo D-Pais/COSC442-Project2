@@ -1,6 +1,10 @@
+import static org.junit.Assert.assertThrows;
+
+import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class VendingMachineTest {
 
@@ -22,6 +26,7 @@ public class VendingMachineTest {
         item1 = new VendingMachineItem("Cola", 2.50);
         item2 = new VendingMachineItem("Water", 1.00);
         item3 = new VendingMachineItem("Tea", 1.50);
+        item4 = new VendingMachineItem("Scone", 2.00);
     }
 
     @AfterEach
@@ -41,17 +46,25 @@ public class VendingMachineTest {
 
     @Test
     void testVendingConstructor() {
-        assert (vendor != null);
-        assert (vendor.getBalance() == 0.0);
-        assert (vendor.getItem("A") == null);
-        assert (vendor.getItem("B") == null);
-        assert (vendor.getItem("C") == null);
-        assert (vendor.getItem("D") == null);
+        assert(vendor != null);
+        assert(vendor.getBalance() == 0.0);
+        assert(vendor.getItem("A") == null);
+        assert(vendor.getItem("B") == null);
+        assert(vendor.getItem("C") == null);
+        assert(vendor.getItem("D") == null);
     }
 
     @Test
     void testAddItem() {
-
+        vendor.addItem(item1, "A");
+        assert(vendor.getItem("A") == item1);
+        vendor.addItem(item2, "B");
+        assert(vendor.getItem("B") == item2);
+        vendor.addItem(item3, "C");
+        assert(vendor.getItem("C") == item3);
+        vendor.addItem(item4, "D");
+        assert(vendor.getItem("D") == item4);
+        assertThrows(VendingMachineException.class, () -> vendor.addItem(item4, "A"));
     }
 
     @Test
@@ -86,26 +99,33 @@ public class VendingMachineTest {
 
     @Test
     void testItemConstructor() {
-        item4 = new VendingMachineItem("Scone", 2.00);
         item5 = new VendingMachineItem("Taffy", 0.75);
+        assert(item5 != null);
         item6 = new VendingMachineItem("Juicebox", 1.75);
+        assert(item6 != null);
     }
 
     @Test
     void testItemConstructorNegative() {
         item7 = new VendingMachineItem("Nuts", -2.25);
+        assert(item7 != null);
         item8 = new VendingMachineItem("Antimatter", -1.00);
+        assert(item8 != null);
     }
 
     @Test
     void testItemConstructorZero() {
         item9 = new VendingMachineItem("Spud", -0.00);
+        assert(item9 != null);
         item0 = new VendingMachineItem("NoTea", 0.00);
+        assert(item0 != null);
     }
 
-    @Test
-    void testGetName() {
-
+    @ParameterizedTest
+    @CsvSource({ "Cola, 2.50", "Water, 1.00", "Tea, 1.50", "Scone, 2.00", "Taffy, 0.75", "Juicebox, 1.75" })
+    void testGetName(String name, double price) {
+        item0 = new VendingMachineItem(name, price);
+        assert(item0.getName() == name);
     }
 
     @Test

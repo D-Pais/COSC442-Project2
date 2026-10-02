@@ -153,10 +153,8 @@ public class VendingMachineTest {
 
     @Test
     void testItemConstructorNegative() {
-        item7 = new VendingMachineItem("Nuts", -2.25);
-        assert(item7 != null);
-        item8 = new VendingMachineItem("Antimatter", -1.00);
-        assert(item8 != null);
+        assertThrows(VendingMachineException.class, () -> new VendingMachineItem("Nuts", -2.25));
+        assertThrows(VendingMachineException.class, () -> new VendingMachineItem("Antimatter", -1.00));
     }
 
     @Test

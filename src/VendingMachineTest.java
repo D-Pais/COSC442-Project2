@@ -78,7 +78,12 @@ public class VendingMachineTest {
 
     @Test
     void testGetItem() {
-
+        vendor.addItem(item1, "A");
+        VendingMachineItem itemGet = vendor.getItem("A");
+        assert(itemGet.getName() == item1.getName());
+        assertEquals(itemGet.getPrice(), item1.getPrice(), 0.001);
+        assert(vendor.getItem("B") == null);
+        assertThrows(VendingMachineException.class, () -> vendor.getItem("Spud"));
     }
 
     @Test
@@ -97,7 +102,16 @@ public class VendingMachineTest {
 
     @Test
     void testRemoveItem() {
-
+        vendor.addItem(item1, "A");
+        assert(vendor.getItem("A") == item1);
+        VendingMachineItem itemBack = vendor.removeItem("A");
+        assert(itemBack.getName() == item1.getName());
+        assertEquals(itemBack.getPrice(), item1.getPrice(), 0.001);
+        assert(vendor.getItem("A") == null);
+        assertThrows(VendingMachineException.class, () -> vendor.removeItem("A"));
+        assertThrows(VendingMachineException.class, () -> vendor.removeItem("B"));
+        assertThrows(VendingMachineException.class, () -> vendor.removeItem("C"));
+        assertThrows(VendingMachineException.class, () -> vendor.removeItem("D"));
     }
 
     @Test

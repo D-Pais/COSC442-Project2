@@ -8,7 +8,7 @@
 | Vending Machine: insertMoney() | Increases the balance of the machine by the amount specified. | If the amount is less than zero, a custom exception is thrown stating the amount inserted can't be negative. | If the double passed for amount is negative, the behaviour changes from setting balance = (balance + amount) to throwing an exception.  Also assumes machine balance to be positive, but with no change to behaviour if somehow negative. | Comment above method details correct pre/post conditions and exception. | testInsertMoney() |
 |
 |
-|
+| Vending Machine: returnChange() | Sets the balance of the machine to 0 and returns the balance the machine had previously. | N/A | The method precondition assumes the balance to be positive, however the documentation does not state any change to behaviour if the balance is somehow negative. | Comment above method details correct pre/post conditions. | testReturnChange()
 | Vending Machine Item: constructor | A Vending Machine Item object is created with the provided Name and Price. | If price is less than zero, a custom exception is thrown stating the price can't be negative. | If the double passed for price is negative, the behaviour changes from creating the item to throwing an exception. | Comment above method details correct constructor pre/post conditions and exception. | testItemConstructor(), testItemConstructorNegative(), testItemConstructorZero() |
 | Vending Machine Item: getName() | The name of the item is returned as normal. | N/A | N/A | Comment above method details proper output. | testGetName() |
 | Vending Machine Item: getPrice()  | The price of the item is returned as normal. | N/A | N/A | Comment above method details proper output. | testGetPrice() |

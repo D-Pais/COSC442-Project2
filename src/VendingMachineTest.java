@@ -102,7 +102,10 @@ public class VendingMachineTest {
 
     @Test
     void testReturnChange() {
-
+        vendor.insertMoney(1.23);
+        assertEquals(1.23, vendor.returnChange(), 0.001);
+        assertEquals(0.0, vendor.getBalance(), 0.001);
+        vendor.returnChange();
     }
 
     @Test

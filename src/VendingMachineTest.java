@@ -69,7 +69,11 @@ public class VendingMachineTest {
 
     @Test
     void testGetBalance() {
-
+        assertEquals(0.0, vendor.getBalance(), 0.001);
+        vendor.insertMoney(5.23);
+        assertEquals(5.23, vendor.getBalance(), 0.001);
+        vendor.returnChange();
+        assertEquals(0.0, vendor.getBalance(), 0.001);
     }
 
     @Test
@@ -79,7 +83,11 @@ public class VendingMachineTest {
 
     @Test
     void testInsertMoney() {
-
+        vendor.insertMoney(5.23);
+        assertEquals(5.23, vendor.getBalance(), 0.001);
+        vendor.insertMoney(0.00);
+        assertEquals(5.23, vendor.getBalance(), 0.001);
+        assertThrows(VendingMachineException.class, () -> vendor.insertMoney(-1.00));
     }
 
     @Test
@@ -122,17 +130,17 @@ public class VendingMachineTest {
     }
 
     @ParameterizedTest
-    @CsvSource({ "Cola, 2.50", "Water, 1.00", "Tea, 1.50", "Scone, 2.00", "Taffy, 0.75", "Juicebox, 1.75" })
+    @CsvSource({"Cola, 2.50", "Water, 1.00", "Tea, 1.50", "Scone, 2.00", "Taffy, 0.75", "Juicebox, 1.75"})
     void testGetName(String name, double price) {
         item0 = new VendingMachineItem(name, price);
         assert(item0.getName() == name);
     }
 
     @ParameterizedTest
-    @CsvSource({ "Cola, 2.50", "Water, 1.00", "Tea, 1.50", "Scone, 2.00", "Taffy, 0.75", "Juicebox, 1.75" })
+    @CsvSource({"Cola, 2.50", "Water, 1.00", "Tea, 1.50", "Scone, 2.00", "Taffy, 0.75", "Juicebox, 1.75"})
     void testGetPrice(String name, double price) {
         item0 = new VendingMachineItem(name, price);
-        assertEquals(price, item0.getPrice(), 0.01);
+        assertEquals(price, item0.getPrice(), 0.001);
     }
 
 }

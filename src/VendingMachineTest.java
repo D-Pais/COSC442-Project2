@@ -97,7 +97,28 @@ public class VendingMachineTest {
 
     @Test
     void testMakePurchase() {
+        vendor.addItem(item1, "A");
+        vendor.addItem(item2, "B");
+        vendor.insertMoney(10.00);
+        assert(vendor.makePurchase("A"));
+        assert(vendor.makePurchase("B"));
+    }
 
+    @Test
+    void testMakePurchasePoor() {
+        vendor.addItem(item3, "C");
+        vendor.addItem(item4, "D");
+        assert(!vendor.makePurchase("C"));
+        assert(!vendor.makePurchase("D"));
+        vendor.insertMoney(1.75);
+        assert(vendor.makePurchase("C"));
+        assert(!vendor.makePurchase("D"));
+    }
+
+    @Test
+    void testMakePurchaseEmpty() {
+        assert(!vendor.makePurchase("A"));
+        assert(!vendor.makePurchase("B"));
     }
 
     @Test
